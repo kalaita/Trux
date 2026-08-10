@@ -17,7 +17,8 @@ alias 'e'='clear && exit'
 alias la='ls -A'                                                  # Clear / exit / reload          alias c='clear'                  alias e='exit'
 alias 'cfurl'='cloudflared --url localhost:8080'
 alias reload='source ~/.bashrc'  
-# Grep colors                    alias grep='grep --color=auto'
+# Grep colors
+alias grep='grep --color=auto'
 
 # Disk
 alias df='df -h'
