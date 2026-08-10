@@ -1,0 +1,66 @@
+cd ~/                                                                                              # Current directory only, bright green                            PS1='\[\e[1;92m\]\w\[\e[0m\] \$\[\e[0m\] \ '                                                                                        # Listing
+
+# Custom green bash prompt
+export PS1='\[\e[1;39m\]Nobita @ \w \$\[\e[0m\] '
+
+# Auto attach/create tmux session "ksi"
+if [ -z "$TMUX" ] && command -v tmux >/dev/null 2>&1; then
+    tmux has-session -t ksi 2>/dev/null \
+        && tmux attach-session -t ksi \
+        || tmux new-session -s ksi
+fi
+
+alias 'rm'='rm -rf'
+alias l='ls -CF'
+alias 'c'='clear'
+alias 'e'='clear && exit'
+alias la='ls -A'                                                  # Clear / exit / reload          alias c='clear'                  alias e='exit'
+alias 'cfurl'='cloudflared --url localhost:8080'
+alias reload='source ~/.bashrc'  
+# Grep colors                    alias grep='grep --color=auto'
+
+# Disk
+alias df='df -h'
+alias du='du -h'
+alias free='free -h'
+
+# Packages
+alias upgrade='sudo apt update && sudo apt upgrade -y && python3 -m pip install --upgrade pip && sudo npm install -g npm@latest'
+alias 'install'='sudo apt install -y'
+
+# Git
+alias gc='git clone'
+
+# Servers
+alias pyserve='python3 -m http.server 8080 &'
+alias phpserve='php -S localhost:8080 &'
+alias ms='miniserve . &'
+
+
+
+# ==========================
+# Better Defaults
+# ==========================
+
+# Colors
+if command -v dircolors >/dev/null 2>&1; then
+    eval "$(dircolors -b)"
+fi
+
+export GREP_OPTIONS='--color=auto'
+
+export LS_OPTIONS='--color=auto'
+alias ls='ls $LS_OPTIONS'
+
+
+# ==========================
+# Color settings
+# ==========================
+
+export CLICOLOR=1
+
+# Custom LS colors
+export LS_COLORS='di=1;92:ln=1;96:so=1;95:pi=1;93:ex=1;91:*.tar=1;31:*.zip=1;31:*.gz=1;31'
+
+
+# End
