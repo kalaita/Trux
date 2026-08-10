@@ -106,18 +106,6 @@ rm -f "$CLOUDFLARED_DEB"
 
 
 # ------------------------------------------
-# 10. Upgrade pip and npm
-# ------------------------------------------
-
-echo "[9/10] Upgrading pip..."
-
-python3 -m pip install --upgrade pip
-
-
-echo "[10/10] Upgrading npm..."
-
-sudo npm install -g npm@latest
-
 
 # ------------------------------------------
 # Reload bash configuration
