@@ -1,5 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
+touch ~/.hushlogin
+
 termux-change-repo
 
 pkg update -y
