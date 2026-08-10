@@ -61,8 +61,6 @@ echo
 echo "→ Applying Termux settings..."
 termux-reload-settings
 
-echo "→ Loading new shell configuration..."
-source "$HOME/.bashrc"
 
 echo
 echo "=========================================="
