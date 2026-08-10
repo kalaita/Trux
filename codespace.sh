@@ -58,38 +58,11 @@ sudo apt install -y \
     aria2 \
 
 
-# ------------------------------------------
-# 6. Install miniserve
-# ------------------------------------------
+# -----------------------------------------
 
-echo "[5/10] Installing miniserve..."
-
-mkdir -p "$BIN_DIR"
-
-ARCH="$(dpkg --print-architecture)"
-
-case "$ARCH" in
-    amd64)
-        MINISERVE_FILE="miniserve-linux-x86_64"
-        ;;
-    arm64)
-        MINISERVE_FILE="miniserve-linux-aarch64"
-        ;;
-    armhf)
-        MINISERVE_FILE="miniserve-linux-armv7"
-        ;;
-    *)
-        echo "Unsupported architecture for miniserve: $ARCH"
-        exit 1
-        ;;
-esac
-
-curl -fL \
-    "https://github.com/svenstaro/miniserve/releases/latest/download/$MINISERVE_FILE" \
-    -o "$BIN_DIR/miniserve"
-
-chmod +x "$BIN_DIR/miniserve"
-
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+brew install miniserve
 
 # ------------------------------------------
 # 7. Add ~/.local/bin to PATH
