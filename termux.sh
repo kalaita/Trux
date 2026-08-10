@@ -7,7 +7,7 @@ TERMUX_DIR="$HOME/.termux"
 
 echo
 echo "=========================================="
-echo "        Trux Termux Setup"
+echo "        Termux Termux Setup"
 echo "=========================================="
 echo
 echo
