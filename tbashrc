@@ -4,4 +4,3 @@ alias 'c'='clear'
 alias 'g'='clear && gh cs ssh -c opulent-dollop-xr944rjg7v6j3g9r'
 alias 'gs'='clear && gh cs stop -c opulent-dollop-xr944rjg7v6j3g9r'
 alias 'la'='ls -A'
-g
