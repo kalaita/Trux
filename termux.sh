@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-touch ~/.hushlogin
+touch "$HOME/.hushlogin"
 
 termux-change-repo
 
