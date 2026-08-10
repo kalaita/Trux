@@ -24,10 +24,6 @@ sudo apt install -y \
     p7zip-full \
     aria2 \
 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-brew install miniserve
-
 if ! grep -q 'HOME/.local/bin' "$HOME_DIR/.bashrc"; then
     echo '' >> "$HOME_DIR/.bashrc"
     echo '# ~/.local/bin' >> "$HOME_DIR/.bashrc"
