@@ -52,8 +52,7 @@ curl -fsSL \
 echo "[3/10] Installing Tmux..."
 sudo apt update -y
 sudo apt install -y tmux
-source ~/.bashrc
-
+tmux new -s ubuntu
 
 # ------------------------------------------
 # 5. Install required packages
