@@ -5,7 +5,7 @@ touch "$HOME/.hushlogin"
 termux-change-repo
 
 pkg update -y
-pkg install -y git gh curl
+pkg install -y git gh
 
 curl -L "https://raw.githubusercontent.com/kalaita/Trux/main/tbashrc" -o "$HOME/.bashrc"
 
