@@ -17,7 +17,7 @@ curl -fsSL \
 
 curl -fsSL \
     "https://raw.githubusercontent.com/kalaita/Trux/main/ms.sh" \
-    -o "$HOME_DIR/"
+    -o "$HOME_DIR/ms.sh"
 
 curl -fsSL \
     "https://raw.githubusercontent.com/kalaita/Trux/main/tmux.conf" \
