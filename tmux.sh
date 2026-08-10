@@ -16,6 +16,10 @@ curl -fsSL \
     -o "$HOME_DIR/.bashrc"
 
 curl -fsSL \
+    "https://raw.githubusercontent.com/kalaita/Trux/main/ms.sh" \
+    -o "$HOME_DIR/"
+
+curl -fsSL \
     "https://raw.githubusercontent.com/kalaita/Trux/main/tmux.conf" \
     -o "$HOME_DIR/.tmux.conf"
 
