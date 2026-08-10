@@ -52,7 +52,18 @@ curl -fsSL \
 echo "[3/10] Installing Tmux..."
 sudo apt update -y
 sudo apt install -y tmux
-tmux new -s ubuntu
+
+
+
+if [ -z "$TMUX" ]; then
+    exec tmux new-session -s setup "bash '$0'"
+fi
+
+# Everything below runs inside tmux
+echo "Now running inside tmux..."
+
+
+
 
 # ------------------------------------------
 # 5. Install required packages
