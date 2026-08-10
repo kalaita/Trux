@@ -2,39 +2,14 @@
 
 set -e
 
-# ==========================================
-# Ubuntu Automatic Setup Script
-# ==========================================
-
 echo "=========================================="
-echo "        Ubuntu Setup Starting..."
+echo "        SETUP STARTED"
 echo "=========================================="
-
-
 
 HOME_DIR="$HOME"
 BIN_DIR="$HOME_DIR/.local/bin"
 
-# ------------------------------------------
-# 1. Create ~/.hushlogin
-# ------------------------------------------
-
-echo "[1/10] Creating ~/.hushlogin..."
 touch "$HOME_DIR/.hushlogin"
-
-
-# ------------------------------------------
-# 2. Go to home directory
-# ------------------------------------------
-
-cd "$HOME_DIR"
-
-
-# ------------------------------------------
-# 3. Download bashrc and tmux.conf
-# ------------------------------------------
-
-echo "[2/10] Installing custom bash configuration..."
 
 curl -fsSL \
     "https://raw.githubusercontent.com/kalaita/Trux/main/cbashrc" \
@@ -44,31 +19,14 @@ curl -fsSL \
     "https://raw.githubusercontent.com/kalaita/Trux/main/tmux.conf" \
     -o "$HOME_DIR/.tmux.conf"
 
-
-
-# ------------------------------------------
-# 5. Install required packages
-# ------------------------------------------
-
-echo "[4/10] Installing packages..."
-
 sudo apt update -y
 sudo apt install -y \
     p7zip-full \
     aria2 \
 
-
-# -----------------------------------------
-
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 brew install miniserve
-
-# ------------------------------------------
-# 7. Add ~/.local/bin to PATH
-# ------------------------------------------
-
-echo "[6/10] Configuring PATH..."
 
 if ! grep -q 'HOME/.local/bin' "$HOME_DIR/.bashrc"; then
     echo '' >> "$HOME_DIR/.bashrc"
@@ -77,13 +35,6 @@ if ! grep -q 'HOME/.local/bin' "$HOME_DIR/.bashrc"; then
 fi
 
 export PATH="$BIN_DIR:$PATH"
-
-
-# ------------------------------------------
-# 8. Install cloudflared using .deb
-# ------------------------------------------
-
-echo "[7/10] Installing cloudflared..."
 
 CLOUDFLARED_DEB="/tmp/cloudflared.deb"
 
@@ -99,62 +50,8 @@ sudo dpkg -i "$CLOUDFLARED_DEB" || {
 
 rm -f "$CLOUDFLARED_DEB"
 
-
-# ------------------------------------------
-# 9. Upgrade Ubuntu packages
-# ------------------------------------------
-
-
-# ------------------------------------------
-
-# ------------------------------------------
-# Reload bash configuration
-# ------------------------------------------
-
-echo ""
-echo "Reloading ~/.bashrc..."
-
-source "$HOME_DIR/.bashrc"
-
-
-# ------------------------------------------
-# Check installations
-# ------------------------------------------
-
 echo ""
 echo "=========================================="
-echo "          Installation Complete"
+echo "          SETUP COMPLETE"
 echo "=========================================="
-
 echo ""
-echo "Versions:"
-echo "------------------------------------------"
-
-echo "miniserve:"
-miniserve --version || true
-
-echo ""
-echo "cloudflared:"
-cloudflared --version || true
-
-echo ""
-echo "Python:"
-python3 --version
-
-echo ""
-echo "pip:"
-python3 -m pip --version
-
-echo ""
-echo "npm:"
-npm --version
-
-echo ""
-echo "tmux:"
-tmux -V
-
-echo ""
-echo "=========================================="
-echo "           Ubuntu Setup Done!"
-echo "=========================================="
-
