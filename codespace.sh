@@ -10,11 +10,7 @@ echo "=========================================="
 echo "        Ubuntu Setup Starting..."
 echo "=========================================="
 
-# Make sure we are running as normal user
-if [ "$EUID" -eq 0 ]; then
-    echo "Please run this script as your normal user, NOT with sudo."
-    exit 1
-fi
+
 
 HOME_DIR="$HOME"
 BIN_DIR="$HOME_DIR/.local/bin"
@@ -53,8 +49,10 @@ curl -fsSL \
 # 4. Update package lists
 # ------------------------------------------
 
-echo "[3/10] Updating APT..."
+echo "[3/10] Installing Tmux..."
 sudo apt update -y
+sudo apt install -y tmux
+tmux
 
 
 # ------------------------------------------
@@ -64,13 +62,8 @@ sudo apt update -y
 echo "[4/10] Installing packages..."
 
 sudo apt install -y \
-    curl \
-    wget \
     p7zip-full \
     aria2 \
-    python3-pip \
-    npm \
-    tmux
 
 
 # ------------------------------------------
@@ -146,11 +139,6 @@ rm -f "$CLOUDFLARED_DEB"
 # 9. Upgrade Ubuntu packages
 # ------------------------------------------
 
-echo "[8/10] Upgrading Ubuntu packages..."
-
-sudo apt update -y
-sudo apt upgrade -y
-
 
 # ------------------------------------------
 # 10. Upgrade pip and npm
@@ -158,7 +146,7 @@ sudo apt upgrade -y
 
 echo "[9/10] Upgrading pip..."
 
-python3 -m pip install --upgrade pip --break-system-packages
+python3 -m pip install --upgrade pip
 
 
 echo "[10/10] Upgrading npm..."
