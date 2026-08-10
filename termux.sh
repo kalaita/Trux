@@ -1,5 +1,11 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
+echo
+echo "=========================================="
+echo "          SETUP STARTED"
+echo "=========================================="
+echo
+
 set -e
 
 REPO="https://raw.githubusercontent.com/kalaita/Trux/main"
@@ -33,6 +39,6 @@ termux-reload-settings
 
 echo
 echo "=========================================="
-echo "          SETUP COMPLETE ✓"
+echo "          SETUP COMPLETE"
 echo "=========================================="
 echo
