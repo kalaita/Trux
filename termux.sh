@@ -18,28 +18,13 @@ echo "✓ .hushlogin configured."
 
 echo
 echo "[2/6] Storage setup"
-printf "Do you want to setup Termux storage? [y/N]: "
-read -r answer
-
-if [[ "$answer" =~ ^[Yy]$ ]]; then
-    termux-setup-storage
-    echo "✓ Storage setup requested."
-else
-    echo "→ Storage setup skipped."
-fi
+termux-setup-storage
+echo "✓ Storage setup requested."
 
 echo
 echo "[3/6] Repository setup"
-printf "Do you want to change the Termux package repository? [y/N]: "
-read -r answer
-
-if [[ "$answer" =~ ^[Yy]$ ]]; then
-    termux-change-repo
-    echo "✓ Repository configuration completed."
-else
-    echo "→ Repository change skipped."
-fi
-
+termux-change-repo
+echo "✓ Repository configuration completed."
 echo
 echo "[4/6] Updating package lists..."
 pkg update -y
