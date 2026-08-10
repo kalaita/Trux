@@ -45,25 +45,6 @@ curl -fsSL \
     -o "$HOME_DIR/.tmux.conf"
 
 
-# ------------------------------------------
-# 4. Update package lists
-# ------------------------------------------
-
-echo "[3/10] Installing Tmux..."
-sudo apt update -y
-sudo apt install -y tmux
-
-
-
-if [ -z "$TMUX" ]; then
-    exec tmux new-session -s setup "bash '$0'"
-fi
-
-# Everything below runs inside tmux
-echo "Now running inside tmux..."
-
-
-
 
 # ------------------------------------------
 # 5. Install required packages
@@ -71,6 +52,7 @@ echo "Now running inside tmux..."
 
 echo "[4/10] Installing packages..."
 
+sudo apt update -y
 sudo apt install -y \
     p7zip-full \
     aria2 \
