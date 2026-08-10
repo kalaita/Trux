@@ -10,16 +10,7 @@ echo "=========================================="
 echo "        Trux Termux Setup"
 echo "=========================================="
 echo
-echo "Shell script fetched via curl."
-echo "Do you want to start the setup?"
-printf "Reply with y to continue: "
-read -r answer
-
-if [[ ! "$answer" =~ ^[Yy]$ ]]; then
-    echo "Setup cancelled."
-    exit 0
-fi
-
+echo
 echo
 echo "[1/6] Setting up .hushlogin..."
 touch "$HOME/.hushlogin"
@@ -60,7 +51,7 @@ pkg install -y git gh
 echo "✓ Required packages installed."
 
 echo
-echo "[6/6] Downloading Trux configuration files..."
+echo "[6/6] Downloading Termux configuration files..."
 
 echo "→ Copying .bashrc..."
 curl -fsSL "$REPO/tbashrc" -o "$HOME/.bashrc"
