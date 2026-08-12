@@ -50,6 +50,7 @@ sudo dpkg -i "$CLOUDFLARED_DEB" || {
 
 rm -f "$CLOUDFLARED_DEB"
 
+tmux source-file ~/.tmux.conf
 echo ""
 echo "=========================================="
 echo "          SETUP COMPLETE"
