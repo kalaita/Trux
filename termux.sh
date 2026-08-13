@@ -15,8 +15,6 @@ touch "$HOME/.hushlogin"
 
 termux-setup-storage
 
-termux-change-repo
-
 pkg update -y
 
 pkg install -y git gh
