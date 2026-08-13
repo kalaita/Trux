@@ -63,4 +63,104 @@ export CLICOLOR=1
 # Custom LS colors
 export LS_COLORS='di=1;92:ln=1;96:so=1;95:pi=1;93:ex=1;91:*.tar=1;31:*.zip=1;31:*.gz=1;31'
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+
+
+ca() {
+    if ! command -v colab >/dev/null 2>&1; then
+        echo "[ca] Error: colab command not found."
+        return 1
+    fi
+
+    echo "[ca] Checking existing Colab sessions..."
+
+    local output
+    local session_id
+
+    output="$(colab sessions 2>&1)"
+
+    # Prefer existing T4 session
+    session_id="$(printf '%s\n' "$output" | grep -i 'T4' | grep -oE '[0-9a-fA-F]{6,}' | head -n 1)"
+
+    # Otherwise use first existing session
+    if [ -z "$session_id" ]; then
+        session_id="$(printf '%s\n' "$output" | grep -oE '[0-9a-fA-F]{6,}' | head -n 1)"
+    fi
+
+    # --------------------------------------------------------
+    # No existing session -> create T4
+    # --------------------------------------------------------
+
+    if [ -z "$session_id" ]; then
+        echo "[ca] No active session found."
+        echo "[ca] Creating T4 session..."
+
+        output="$(colab new --gpu T4 2>&1)"
+        local status=$?
+
+        printf '%s\n' "$output"
+
+        if [ "$status" -ne 0 ]; then
+            echo "[ca] Failed to create T4 session."
+            return 1
+        fi
+
+        # Extract session ID
+        session_id="$(printf '%s\n' "$output" | grep -oE '[0-9a-fA-F]{6,}' | head -n 1)"
+
+        if [ -z "$session_id" ]; then
+            echo "[ca] Could not determine session ID."
+            return 1
+        fi
+
+        echo "[ca] Session ID: $session_id"
+
+        # colab new already reported READY.
+        if printf '%s\n' "$output" | grep -qi 'Session READY'; then
+            echo "[ca] Session is READY."
+        else
+            echo "[ca] Session was created but READY status was not confirmed."
+            echo "[ca] Checking session status..."
+
+            output="$(colab sessions 2>&1)"
+
+            if ! printf '%s\n' "$output" | grep -q "$session_id"; then
+                echo "[ca] Session $session_id could not be found."
+                return 1
+            fi
+        fi
+
+    else
+        echo "[ca] Existing session found: $session_id"
+    fi
+
+    # --------------------------------------------------------
+    # Check local tmux
+    # --------------------------------------------------------
+
+    if command -v tmux >/dev/null 2>&1; then
+        if tmux list-sessions >/dev/null 2>&1; then
+            echo
+            echo "[ca] WARNING: tmux is currently running."
+            echo "[ca] Colab console may not connect correctly while tmux is active."
+            echo "[ca] Close/exit tmux and run:"
+            echo
+            echo "      ca"
+            echo
+            return 1
+        fi
+    fi
+
+    # --------------------------------------------------------
+    # Connect
+    # --------------------------------------------------------
+
+    echo "[ca] Connecting to Colab session: $session_id"
+    echo
+
+    colab console -s "$session_id"
+}
+
+
+alias cs='colab stop'
+
 # End
