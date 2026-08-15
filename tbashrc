@@ -1,8 +1,10 @@
-KSI='csname'
+KSI1='csname'
+KSI2='csname'
 export PS1='\[\e[31m\]Termux @\[\e[39m\] \[\e[1;39m\]\w \$\[\e[0m\] '
 alias 'e'='clear && exit'
 alias 'reload'="source ~/.bashrc"
 alias 'c'='clear'
-alias 'g'='clear && gh cs ssh -c "$KSI"'
-alias 'gs'='clear && gh cs stop -c "$KSI"'
+alias 'g'='clear && gh cs ssh -c "$KSI1"'
+alias 'gs'='clear && gh cs stop -c "$KSI1"'
 alias 'la'='ls -A'
+alias 'ca'='clear && gh cs ssh -c "$KSI2"'
